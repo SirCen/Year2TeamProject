@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/WaiterStyle.css" />
+</head>
+
+<body>
+<div class="card waiter-ticket" th:style="${currentorders.status == 'ready' ? 'background-color:green;' : 'background-color:#eee;'}" th:fragment="waitercard">
+    <h3 class="card-header text-center" th:text=" 'Order #' + ${currentorders.order_id}"></h3>
+    <div class="card-body">
+        <h4 th:text=" 'Table Number: ' + ${currentorders.table_num}"></h4>
+        <h5 th:text=" 'Time Ordered: ' + ${currentorders.time_ordered}"></h5>
+        <h5 th:text=" 'Status: ' + ${currentorders.status}"></h5>
+        <h5 class="paid" th:if="${currentorders.paid}">Paid</h5>
+        <h5 class="not-paid" th:unless="${currentorders.paid}">Awaiting Payment</h5>
+        <div class="list-group-flush">
+            <div class="list-group-item" th:each="orderitem: ${currentorders.items}">
+                <div th:text="${orderitem.name}"></div>
+                <div th:if="${orderitem.adjustments == 'None'}">
+                    <div th:text=" 'Item adjustments: ' + ${orderitem.adjustments}"></div>
+                </div>
+                <div th:unless="${orderitem.adjustments == 'None'}">
+                    <b th:text=" 'Item adjustments: ' + ${orderitem.adjustments}" style="font-size: 35px"></b>
+                </div>
+                <div th:text=" 'Item status: ' + ${orderitem.status}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn-group-vertical btn-group-justified " role="group" aria-label="orderItemButtons">
+            <form>
+                <span th:if="${currentorders.status} != 'accepted' and ${currentorders.status} != 'ready'">
+                    <a class="btn btn-success btn-block" type="submit" id="AcceptOrder" data-toggle="modal" th:attr="data-target='#acceptModal'+${currentorders.order_id}"  >Accept Order</a>
+                </span>
+            </form>
+            <form>
+                <a class="btn btn-danger btn-block" type="submit" id="CancelOrder" data-toggle="modal" th:attr="data-target='#cancelModal'+${currentorders.order_id}" >Cancel Order</a>
+            </form>
+            <form >
+                <a class="btn btn-warning btn-block" type="submit" id="ModifyOrder" data-toggle="modal" th:attr="data-target='#modifyOrderModal'+${currentorders.order_id}">Modify Order</a>
+            </form>
+            <form>
+                <a class="btn btn-primary btn-block" type="submit" id="DeliveredOrder" data-toggle="modal" th:attr="data-target='#deliveredModal'+${currentorders.order_id}">Order Delivered</a>
+            </form>
+        </a>
+        <!-- Accept Modal -->
+        <div class="modal" th:id="'acceptModal' + ${currentorders.order_id}" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header text-center clearfix">
+                        <h2>Accept Order</h2>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <h3 class="text-center clearfix" style="padding-bottom: 10px">Do you want to ACCEPT this order?</h3>
+                        <form id="acceptform" th:action="@{/waiter/accept}" method="post">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-secondary btn-block text-right" data-dismiss="modal">Exit</button>
+                            </div>
+                            <div class="col-md-6" style="padding-bottom: 10px">
+                                <form >
+                                    <button type="submit" name = "orderid" th:value="${currentorders.order_id}" class="btn btn-success btn-block text-left">Accept Order</button>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cancel Modal -->
+        <div class="modal" th:id="'cancelModal' + ${currentorders.order_id}" role="dialog" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header text-center clearfix">
+                        <h2>Cancel Order</h2>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <h3 class="text-center clearfix" style="padding-bottom: 10px">Do you want to CANCEL this order?</h3>
+                        <form id="cancelform" th:action="@{/waiter/cancel}" method="post">
+                            <div class="col-md-6" style="padding-bottom: 10px">
+                                <button type="submit" class="btn btn-secondary btn-block text-right" data-dismiss="modal">Exit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <form >
+                                    <button class="btn btn-danger btn-block text-left" type="submit" name="orderid" th:value="${currentorders.order_id}">Cancel Order</button>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Delivered Modal -->
+        <div class="modal" th:id="'deliveredModal' + ${currentorders.order_id}" role="dialog" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header text-center clearfix">
+                        <h2>Order Delivered</h2>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <h3 class="text-center clearfix" style="padding-bottom: 10px">Have you DELIVERED this order?</h3>
+                        <form id="deliveredform" th:action="@{/waiter/delivered}" method="post">
+                            <div class="col-md-6" style="padding-bottom: 10px">
+                                <button type="submit" class="btn btn-secondary btn-block text-right" data-dismiss="modal">Exit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <form>
+                                    <button type="submit" name = "orderid" th:value="${currentorders.order_id}" class="btn btn-primary btn-block text-left">Order Delivered</button>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modify Order Modal -->
+        <div class="modal" th:id="'modifyOrderModal' + ${currentorders.order_id}" role="dialog" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header text-center clearfix">
+                        <h2>Modify Order</h2>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <h3 class="text-center clearfix" style="padding-bottom: 10px">Do you want to MODIFY this order?</h3>
+                        <form id="modifyform" th:action="@{/waiter/modifyorder}" method="post">
+                            <div class="col-md-6" style="padding-bottom: 10px">
+                                <button type="submit" class="btn btn-secondary btn-block text-right" data-dismiss="modal">Exit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-warning btn-block" type="submit" name="orderid" th:value="${currentorders.order_id}">Modify Order</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

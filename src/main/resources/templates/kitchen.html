@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Chris Wilsher and Alex Costi ">
+  <meta name="description" content="Kitchen Order page">
+  <meta http-equiv="refresh" content="3">
+  <title>Kitchen Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../stylesheets/KitchenStyle.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/staffnavbar :: staffnavbar}"/>
+<div class="jumbotron text-center">
+  <h1>Kitchen Orders</h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-xs-6" th:each="items: ${items}" th:id="${items.order_id}">
+      <div class="kitchen-ticket">
+        <div class="card-header" th:text="${items.item.name}">Item Name</div>
+        <div class="card-body">
+          <span th:if="${items.item.adjustments == 'None'}">
+            <p>No Adjustments</p>
+          </span>
+          <span th:unless="${items.item.adjustments == 'None'}">
+            <div class="card-text" th:text="'Adjustments: ' + ${items.item.adjustments}">Adjustments</div>
+          </span>
+          <div class="card-text">
+            <p th:text="'Table ' + ${items.table_num}">Table Number</p>
+            <p th:text="'Order #' + ${items.order_id}">Order ID</p>
+            <p th:text="'Time Ordered: ' + ${items.time_ordered}">Time</p>
+            <p th:text="'Status: ' + ${items.item.status}">Status</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <form id="completedOrder" action="#" th:action="@{/kitchen/ready}" method="post">
+            <button type="submit" id="ready" name="ready" th:value="${items.item.order_items_id}" class="btn-block btn-group-lg btn-success kitchen-button">Order Complete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

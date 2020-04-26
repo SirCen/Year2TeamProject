@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title> Restaurant Menu </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="15">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../stylesheets/MenuStyle.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="/javascript/menu.js"></script>
+</head>
+<body class="body">
+<div class="row" >
+  <div class="menuheader">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-10 col-sm-10">
+          <img src="logo.png" alt="logo" width="375" height="225">
+          <h1 class="headerText">Menu</h1>
+        </div>
+        <div class="col align-self-end">
+          <button type="button" class="btn btn-default btn-lg top-buffer" id="Staff-Login" data-toggle="modal" data-target="#Staff-Modal">Staff Login</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 assistance-button"></div>
+        <div class="col-md-10" style="text-align: center; padding-right: 270px">
+          <h7 th:unless="${!table_needs_assistance}" class="helpNotify">A waiter is on the way!</h7>
+        </div>
+        <div class="col-md-1" style="width: fit-content">
+          <form id="helpform" th:action="@{/menu/needsAssistance}" method="post">
+            <button th:if="${!table_needs_assistance}" type="submit" name = "tablenum" th:value="${table_number}" class="btn help btn-warning" onClick="alert('A waiter will be with you shortly');">Press for Assistance</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Staff Login Modal content-->
+  <div class="modal fade" id="Staff-Modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="staff-modal-header" style="padding:35px 50px;">
+          <h4>Staff Login</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" id ="loginform" th:action="@{/login}" method="post">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> User ID</label>
+              <input type="text" name="userName" class="form-control" id="usrname" placeholder="Enter UserID" th:value="*{userName}">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="text" name="pinNumber" class="form-control" id="psw" placeholder="Enter password"  th:value="*{pinNumber}">
+            </div>
+            <button type="submit" name="loginConfirm" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+          </form>
+          <button type="submit" class="btn btn-danger btn-block"  data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotronmenu">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="menu">
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a class="menu" href="#starters-tab" data-toggle="tab">Starters</a></li>
+            <li><a class="menu" href="#mains-tab" data-toggle="tab">Mains</a></li>
+            <li><a class="menu" href="#desserts-tab" data-toggle="tab">Desserts</a></li>
+            <li><a class="menu" href="#drinks-tab" data-toggle="tab">Drinks</a></li>
+          </ul>
+          <div class="tab-content menu">
+            <div class="tab-pane active" id="starters-tab">
+              <div class="list-group">
+                <div class="list-group-flush" id="starter">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="mains-tab">
+              <div class="list-group">
+                <div class="list-group-flush" id="main">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="desserts-tab">
+              <div class="list-group">
+                <div class="list-group-flush" id="dessert">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="drinks-tab">
+              <div class="list-group">
+                <div class="list-group-flush" id="drink">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+<!--        <div class="row">-->
+          <div class="col-md-12" style="text-align: center">
+            <h2 class="underline" th:text="'Table '+${table_number}">Table</h2>
+          </div>
+
+<!--        </div>-->
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Order:</h2>
+            <div id="orderList"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-info btn-lg" onclick="submitOrder()">Submit Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modify-modal" role="dialog" aria-hidden="true" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header modify-header">
+        <h3>Modify Item</h3>
+      </div>
+      <div class="modal-body clearfix" id="mod-modal-body" data-id="" data-name="">
+        <textarea class="form-control" id="adjustments" rows="8"  style="width:100%; height:100%;" placeholder="Add Item Modifications Here, eg: No Pickles"></textarea>
+      </div>
+      <div class="modal-footer modify-footer">
+        <button class="btn btn-success btn-default pull-right" form="adjustments" style="width:40%; height:40%; margin: 10px"
+                value="modifications" type="submit" th:attr="onclick=|addItem(document.getElementById('mod-modal-body').getAttribute('data-id'), document.getElementById('mod-modal-body').getAttribute('data-name'), document.getElementById('adjustments').value)|" data-dismiss="modal">Add Item </button>
+        <button type="submit" id="closeModModal" class="btn btn-danger btn-default " style="width:40%; height:40%; margin: 10px" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="order-limit-modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modify-modal-header" style="padding:20px 30px;">
+        <h4>You have too many items in your order!</h4>
+      </div>
+      <div class="modal-body">
+        <p id="limitDescription">You have too many items in your order!</p>
+      </div>
+      <div class="modal-modify-footer" style="text-align: center">
+        <button type="submit" id="closeOrderLimitModal" class="btn btn-danger btn-default " style="width:40%; height:40%; margin: 10px" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<div th:each="menu_items: ${menu_items}">
+  <div th:replace="~{fragments/menuitem.html :: menuitem}"></div>
+  <script th:inline="javascript">
+      /*<![CDATA[*/
+      document.getElementById([[${menu_items.category}]]).appendChild(document.getElementById([[${menu_items.menu_id}]] + 'Row'));
+      /*]]>*/
+  </script>
+</div>
+</html>

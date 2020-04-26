@@ -1,0 +1,13 @@
+menu_id,name,price,description,allergies,calories,available,image,category
+1,Starters item 1,7.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,starter
+2,Starters item 2,2.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,starter
+3,Main item 1,2.99,Our restaurants finest generic food item 1,No allergies,1000,1,food-item-example.png,main
+4,Main item 2,3.99,Our restaurants finest generic food item 2,Some allergies,1000,1,no-image-available.png,main
+5,Main item 3,4.99,Our restaurants finest generic food item 3,Nothing but allergies,1000,1,no-image-available.png,main
+6,Main item 4,5.99,Our restaurants finest generic food item 4,Some allergies,1000,1,no-image-available.png,main
+7,Main item 5,6.99,Our restaurants finest generic food item 5,No allergies,1000,1,no-image-available.png,main
+8,Main item 6,7.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,main
+9,Desserts item 1,7.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,dessert
+10,Desserts item 2,4.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,dessert
+11,Drinks item 1,7.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,drink
+12,Drinks item 2,29.99,Our restaurants finest generic food item 6,Some allergies,1000,1,no-image-available.png,drink

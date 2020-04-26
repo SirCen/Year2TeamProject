@@ -1,0 +1,21 @@
+.jumbotronStart {
+   background: #4942db;
+   color: white;
+   padding-bottom: 40px;
+   font-family: sans-serif;
+   font-size: 36pt;
+   font-weight: 700;
+ }
+
+.welcomeheader {
+     color: white;
+     font-family: sans-serif;
+     font-size: 36pt;
+     font-weight: 700;
+     }
+.jumbotronuser {
+    background: #4942db;
+    color: white;
+    padding-bottom: 10px;
+    opacity: 0.8;
+}

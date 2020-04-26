@@ -1,0 +1,135 @@
+/*.loader {*/
+/*  border: 12px solid #f3f3f3;*/
+/*  border-radius: 50%;*/
+/*  border-top: 12px solid black;*/
+/*  border-right: 12px solid white;*/
+/*  border-bottom: 12px solid white;*/
+/*  border-left: 12px solid white;*/
+/*  width: 80px;*/
+/*  height: 80px;*/
+/*  -webkit-animation: spin 5s linear infinite;*/
+/*  animation: spin 5s linear infinite;*/
+/*  align-self: center;*/
+/*}*/
+#sparkles > path {
+  animation: sparklyBits 1000ms infinite;
+  position: absolute;
+}
+
+@keyframes sparklyBits {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #4942db;
+  text-align: center;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+
+.header-text * {
+  color: white;
+  font-weight: 900;
+}
+
+.header-subtext * {
+  display: inline-block;
+  color: white;
+  font-weight: 900;
+}
+
+.btn {
+  margin: 10px !important;
+}
+
+.display {
+  margin-top: 150px;
+  position: relative;
+}
+
+.order-card {
+  color: #4942db;
+  margin-bottom: 30px;
+  border-bottom: 3px solid;
+  padding-bottom: 30px;
+}
+
+.order-card .card-header {
+  border-bottom: 2px dashed;
+}
+
+.card-header h2 {
+  font-weight: 900;
+}
+
+.order-item-card {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.order-item-card .card-header {
+  font-weight: 600;
+  border-bottom: 0px;
+}
+
+.card-body, p {
+  font-size: medium;
+}
+
+.m-progress-bar {
+  min-height: 1em;
+  background: #4942db;
+  width: 5%;
+}
+
+.modal-body {
+    text-align: left;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: inherit;
+  color: #ff4f78;
+  text-align: center;
+  padding-bottom: 5px;
+  z-index: 1;
+}
+
+
+.paid {
+  color: inherit;
+}
+
+.not-paid {
+  color: red;
+}
+
+#orderSelect {
+  height: 100px;
+  overflow-y: auto;
+}
+
+.payOrderText {
+  font-family: sans-serif;
+  font-size: x-large;
+}

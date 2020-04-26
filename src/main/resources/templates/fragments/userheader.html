@@ -1,0 +1,47 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/MenuStyle.css" />
+</head>
+
+<body>
+<div class="row" th:fragment="userheader (text)">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/MenuStyle.css" />
+    <div class="jumbotronStart text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-sm-10 align-self-center" style="padding-left:350px">
+                    <img src="logo.png" alt="logo" width="250" height="150">
+                </div>
+                <div class="col align-self-end">
+                    <button type="button" class="btn btn-default btn-lg" id="Staff-Login" data-toggle="modal" data-target="#Staff-Modal">Staff Login</button>
+                </div>
+            </div>
+            <h1 class="headertext headerunderline" th:text="${text}">Welcome</h1>
+        </div>
+    </div>
+    <!-- Staff Login Modal content-->
+    <div class="modal fade" id="Staff-Modal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="staff-modal-header" style="padding:35px 50px;">
+                    <h3>Staff Login</h3>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form role="form" id ="loginform" th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="usrname"><span class="glyphicon glyphicon-user"></span> User ID</label>
+                            <input type="text" name="userName" class="form-control" id="usrname" placeholder="Enter UserID" th:value="*{userName}">
+                            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                            <input type="text" name="password" class="form-control" id="psw" placeholder="Enter password"  th:value="*{pinNumber}">
+                        </div>
+                        <button type="submit" name="loginConfirm" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                    </form>
+                    <button type="submit" class="btn btn-danger btn-block"  data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

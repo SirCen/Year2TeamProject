@@ -1,0 +1,314 @@
+.jumbotron {
+  background: #532F8C;
+  color: white;
+  padding-bottom: 80px; }
+.jumbotron .btn-primary {
+  background: #845ac7;
+  border-color: #845ac7; }
+.jumbotron .btn-primary:hover {
+  background: #7646c1; }
+.jumbotron p {
+  color: #d9ccee;
+  max-width: 75%;
+  margin: 1em auto 2em; }
+.navbar + .jumbotron {
+  margin-top: -20px; }
+.jumbotron .lang-logo {
+  display: block;
+  background: #B01302;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border: 2px solid white; }
+.jumbotron .lang-logo img {
+  max-width: 100%; }
+/*Styling for waiter order page*/
+.ticket{
+  border:5px solid black;
+  border-radius: 15px 50px 30px 5px;
+  width:20%;
+  height: fit-content;
+  display:inline-block;
+  clear: left;
+  margin-left:30px;
+  background-color:#eee;
+  text-align: center;
+  text-decoration-color: black;
+  font-family: Verdana;
+}
+ticket:hover {
+  background-color: darkgrey;
+  border: 7px solid black;
+}
+.acceptbutton{
+  color:#fff;
+  background-color:#5cb85c;
+  border-color:#4cae4c;
+  border-radius: 5px;
+  width: 350%;
+  margin-bottom: 5px;
+  height: 35px;
+  margin-left: 50%;
+}
+.cancelbutton{
+  color:#fff;
+  background-color:#d9534f;
+  border-color:#d43f3a;
+  border-radius: 5px;
+  width: 350%;
+  margin-bottom: 5px;
+  height: 35px;
+  text-align: center;
+  margin-left: 50%;
+}
+
+.otherbutton{
+  color:#fff;
+  background-color: #2068d9;
+  border-color: #007ad4;
+  border-radius: 5px;
+  width: 350%;
+  margin-bottom: 5px;
+  height: 35px;
+  text-align: center;
+  margin-left: 50%;
+}
+.modifybutton{color:#fff;
+  background-color:#f0ad4e;
+  border-color:#eea236;
+  border-radius: 5px;
+  width: 350%;
+  height: 35px;
+  margin-bottom: 5px;
+  margin-left: 50%;
+}
+.helpalert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+/*Styling form the index page*/
+.info-button {
+  background-color: #0099ff;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background-color: #007acc;
+}
+
+.modify-modal-header {
+  background-color: #5cb85c;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+.modal-modify-footer {
+  background-color: #f9f9f9;
+}
+
+.staff-modal-header, h4 {
+  background-color: #5cb85c;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+/*Styling for login page*/
+.loginButton{
+
+}
+/*Styling for TheMenu*/
+.menuItem{
+  font-size: 30px;
+  text-align: center;
+  border:5px solid black;
+  border-radius: 15px 15px 15px 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.changeButton{
+  background-color: #0099ff;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/*Styling for Kitchen Orders */
+.kitchenticket{
+  border:5px solid black;
+  border-radius: 15px 50px 30px 5px;
+  width:fit-content;
+  height: fit-content;
+  display:inline-block;
+  clear: left;
+  margin-left:30px;
+  background-color:#eee;
+  text-align: center;
+  text-decoration-color: black;
+  font-family: Verdana;
+}
+.completebutton{
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  border-radius: 5px;
+  width: auto;
+  margin-bottom: 5px;
+  height: 60px;
+  margin-left: 12.5%;
+}
+
+/*Styling for post order page*/
+.loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid blue;
+  border-right: 12px solid green;
+  border-bottom: 12px solid red;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.postOrder{
+  border: 3px solid black;
+  border-top: 0px;
+  margin-bottom: 50px;
+}
+
+.postOrderHeader {
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
+  background-color: #4942db;
+  color: white;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+
+
+/*Styling for Kitchen Orders */
+.addButton {
+  color:#fff;
+  background-color:#5cb85c;
+  border-color:#4cae4c;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  height: 35px;
+  width: 50%;
+}
+.deleteButton{
+  color:#fff;
+  background-color:#d9534f;
+  border-color:#d43f3a;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  height: 35px;
+  text-align: center;
+  width: 50%;
+}
+/*Styling for modifyOrder page
+form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.value-button {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 11px 0;
+  background: #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 8px 0 0 8px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+}
+
+ form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input#number {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+*/
+
+.jumbotronuser {
+  background: #4942db;
+  color: white;
+  padding-bottom: 10px;
+  opacity: 0.8; }
+.headerunderline	{
+  border-bottom: 5px solid white;
+}
+.headertext {
+  color: white;
+  font-family: sans-serif;
+  font-size: 36pt;
+  font-weight: 700;
+}

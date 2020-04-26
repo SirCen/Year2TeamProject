@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title> Restaurant Menu </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/StartPageStyle.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="/javascript/start.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/userheader.html :: userheader(text='Welcome')}"></div>
+<div class="row" style="padding-top: 30px">
+    <div class="container col-lg-4 col-lg-offset-4" onchange="selectTable()">
+        <div class="form-group">
+            <select class="form-control" id="tableSelect">
+                <option disabled selected value>Select Table</option>
+                <option th:each="table : ${tables}"
+                        th:value="${table.id}"
+                        th:text="'Table '+${table.id}+' : '+${table.size}+' seats'"></option>
+            </select>
+            <div class="text-center" style="padding-top: 30px">
+                <form id="selectTable" th:action="@{/select}" method="post">
+                    <button id="tableSelectButton" type="submit" name="table" class="btn btn-primary" disabled>Select Table</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

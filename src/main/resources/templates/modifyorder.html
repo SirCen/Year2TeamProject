@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modify Order</title>
+  <link rel="stylesheet" href="../stylesheets/modifyorder.css"/>
+  <meta name="description" content="Modify Order">
+  <meta http-equiv="refresh" content="15" >
+  <title> Modify Order </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div th:each="order: ${order}">
+    <div class="header text-center" style="margin-top: 0px">
+      <div th:replace="~{fragments/staffnavbar :: staffnavbar}"/>
+      <h1 th:text="'Modify Order ' + ${order.order_id}">Modify Order</h1>
+      <h2 th:text="'Table Number ' + ${order.table_num}">Table Number</h2>
+    </div>
+    <div class="modify-order-items container-fluid row">
+      <div th:each="orderitem: ${order.items}" class="card col-md-3">
+        <div class="card-header row">
+          <h2 class="col col-xs-7" th:text="${orderitem.name}">Name</h2>
+          <form class="col col-xs-2" id="deleteItem" th:action="@{/modifyorder/deleteButton}" method="post">
+            <button class="btn btn-lg btn-danger" name="orderItemsID" th:value="${orderitem.order_items_id}">Delete</button>
+          </form>
+        </div>
+        <div class="card-body">
+          <form id="addItem"  th:action="@{/modifyorder/add}" method="post">
+            <input type="number" id="number" name="number" value="0" min="0" max="25">
+            <button type="submit" class="btn btn-lg btn-success" id="addItemButton" name="orderItemsID" th:value="${orderitem.order_items_id}">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

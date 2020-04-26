@@ -1,0 +1,5 @@
+{
+  "name": "Team 24's Team Project",
+  "description": "An app for a restaurant, made by Team 24.",
+  "addons": [ "heroku-postgresql" ]
+}

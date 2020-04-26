@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/MenuStyle.css" />
+</head>
+
+<body>
+<div class="row menuItem" th:id="${menu_items.menu_id} + 'Row'" th:fragment="menuitem">
+  <div class="col-md-2">
+    <img th:src="${menu_items.image}" onerror="this.src='/food-images/no-image-available.png'" th:alt="${menu_items.name}" width="160" height="140">
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 th:text="${menu_items.name}"> name</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <div th:text="'£' + ${menu_items.price}" th:if="${menu_items.available == 1}"> price</div>
+            <div th:if="${menu_items.available == 0}" style="color:red;"><i>Item Unavailable</i></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="accordion" id="InfoCollapse">
+              <div class="card">
+                <div class="card-header" id="Info">
+                  <h2 class="mb-0">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <button class="btn info-button" type="button" data-toggle="collapse" th:attr="data-target=|#info${menu_items.menu_id}|" aria-expanded="true" aria-controls="moreInfo">
+                          Info
+                        </button>
+                      </div>
+                    </div>
+                  </h2>
+                </div>
+                <div class="menu collapse" th:id="'info' + ${menu_items.menu_id}" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div th:text="${menu_items.description}"> description</div>
+                    <div th:text="'Allergies: ' + ${menu_items.allergies}"> allergies</div>
+                    <div th:text="'Calories: ' + ${menu_items.calories}"> calories</div>
+                    <button type="button" class="btn btn-warning btn-lg" id="modify" th:attr="onclick=|openModifyModal('${menu_items.menu_id}', '${menu_items.name}')|" data-toggle="modal" data-target="#modify-modal" th:if="${menu_items.available == 1}">Modify</button>
+                    <button type="button" class="btn btn-warning btn-lg" id="modify" data-toggle="modal" data-target="#modify-modal" th:if="${menu_items.available == 0}" disabled>Modify</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-success btn-lg" th:attr="onclick=|addItem('${menu_items.menu_id}', '${menu_items.name}')|" id="addItem" th:if="${menu_items.available == 1}">Add Item</button>
+        <button class="btn btn-success btn-lg" id="addItem" th:if="${menu_items.available == 0}" disabled>Add Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

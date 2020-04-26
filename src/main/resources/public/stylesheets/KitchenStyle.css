@@ -1,0 +1,79 @@
+.kitchen-ticket {
+  margin-bottom: 30px;
+  background-color: #eee;
+}
+
+.kitchen-ticket .card-header {
+  border: 2px solid black;
+  border-bottom: 0px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-body {
+  border: 2px solid black;
+  padding-top: 5px;
+  padding-left: 10px;
+  font-size: 50px;
+}
+
+.card-text {
+  font-size: 25px;
+}
+
+.card-title {
+  font-size: 30px;
+}
+
+.kitchen-ticket .card-title {
+  font-size: large;
+  font-weight: bold;
+}
+
+.kitchen-ticket .card-footer {
+  border: 2px solid black;
+  border-top: 0px;
+}
+
+.kitchen-ticket .card-footer .btn-block {
+  height: 50px;
+}
+
+.kitchen-button {
+  font-size: 30px;
+}
+
+.jumbotron {
+  background: #532F8C;
+  color: white;
+  padding-bottom: 80px; }
+
+.jumbotron .btn-primary {
+  background: #845ac7;
+  border-color: #845ac7;
+}
+
+.jumbotron .btn-primary:hover {
+  background: #7646c1; }
+
+.jumbotron p {
+  color: #d9ccee;
+  max-width: 75%;
+  margin: 1em auto 2em; }
+
+.navbar + .jumbotron {
+  margin-top: -20px; }
+
+.jumbotron .lang-logo {
+  display: block;
+  background: #B01302;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border: 2px solid white; }
+
+.jumbotron .lang-logo img {
+  max-width: 100%; }

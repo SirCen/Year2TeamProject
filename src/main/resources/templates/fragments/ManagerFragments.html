@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<html>
+
+
+<div id="addUserModal" class="modal" th:fragment="add-user">
+  <!-- The Modal -->
+  <div class="modal-content">
+    <span class="close" id="close-add-user">&times;</span>
+    <!--  Modal header-->
+    <div class="modal-header">
+      <p>Add User</p>
+    </div>
+
+    <!-- Inside of Modal -->
+    <form role="form" id ="addUserForm" th:action="@{/manager/adduser}" method="post">
+      <div class="form-group">
+<!--        staff name-->
+        <label for="name"><span class="glyphicon glyphicon-user"></span> Staff Name</label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name"
+               th:value="*{name}">
+<!--        staff password -->
+        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+        <input type="text" name="password" class="form-control" id="psw"
+               placeholder="Enter password"  th:value="*{password}">
+<!--        staff password2 to confirm they are the same-->
+        <label for="psw2"><span class="glyphicon glyphicon-eye-open"></span> Confirm
+          Password</label>
+        <input type="text" name="password2" class="form-control" id="psw2"
+               placeholder="Confirm password"  th:value="*{password2}">
+<!--        role picker-->
+        <label for="role"><span class="glyphicon glyphicon-tag"></span>Choose a role </label>
+        <select id="role" name="role">
+          <option value="staff" selected="selected">Staff</option>
+          <option value="manager">Manager</option>
+        </select>
+      </div>
+<!--      sumbit button-->
+      <button type="submit" name="addUserConfirm" class="btn btn-success btn-block"><span
+          class="glyphicon glyphicon-off"></span> Confirm</button>
+    </form>
+  </div>
+</div>
+
+
+<div id="modifyUserModal" class="modal" th:fragment="modify-user">
+  <!-- The Modal -->
+  <div class="modal-content">
+    <span class="close" id="close-modify-user">&times;</span>
+    <!--  Modal header-->
+    <div class="modal-header">
+      <p>Modify User</p>
+    </div>
+
+    <!-- Inside of Modal -->
+    <div class="container-fluid">
+      <div class="row">
+        <form role="form" id ="modifyUserForm" th:action="@{/manager/modify}" method="post">
+          <div class="col-md-12">
+<!--            staff picker drop down-->
+            <select class="form-control" id="staffSelect" onchange="selectStaff()">
+              <option disabled selected value>Select Staff Member</option>
+              <option th:each="user : ${staff}"
+                      th:value="${user.getStaffId()}"
+                      th:text="'Staff ID '+${user.getStaffId()}+' : '+${user.getName()}"></option>
+            </select>
+            <br>
+            <div class="row">
+              <div class="col-md-3">
+<!--                account enabled/disable-->
+                  <input type="radio" id="enabled" name="enabled" value="true" disabled>
+                  <label for="enabled">Enabled</label><br>
+                  <input type="radio" id="disabled" name="enabled" value="false" disabled>
+                  <label for="disabled">Disabled</label><br>
+              </div>
+              <div class="col-md-3">
+                <!--                staff role changer-->
+                <label for="role"><span class="glyphicon glyphicon-tag"></span>Choose a role </label>
+                <select id="roleModify" name="role" disabled>
+                  <option disabled selected value>Select a staff position</option>
+                  <option value="staff">Staff</option>
+                  <option value="manager">Manager</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+<!--                staff name changer-->
+                <label for="name"><span class="glyphicon glyphicon-user"></span> Staff Name</label>
+                <input type="text" name="name" class="form-control" id="nameModify"
+                       placeholder="Enter Name"
+                       th:value="*{name}" disabled>
+              </div>
+              <div class="col-md-3">
+<!--                staff password changer-->
+                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                <input type="text" name="password" class="form-control" id="pswModify"
+                       placeholder="Enter password"  th:value="*{password}" disabled>
+<!--                staff password change confirm-->
+                <label for="psw2"><span class="glyphicon glyphicon-eye-open"></span> Confirm
+                  Password</label>
+                <input type="text" name="password2" class="form-control" id="psw2Modify"
+                       placeholder="Confirm password"  th:value="*{password2}" disabled>
+              </div>
+            </div>
+          </div>
+<!--          submit button-->
+          <button type="submit" name="staffId" class="btn btn-success btn-block"
+                  id="confirmModifyBtn" disabled>
+            <span class="glyphicon glyphicon-off"></span> Confirm
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="alert success text-center" th:fragment="successCreate">
+  <!--Success message-->
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h2>Success</h2>
+  <h3 th:text="'Created User ID '+${id}"></h3>
+</div>
+
+<div class="alert success text-center" th:fragment="successModify">
+  <!--Success message-->
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h2>Success</h2>
+  <h3 th:text="'Modified User ID '+${id}"></h3>
+</div>
+
+
+<div class="alert fail text-center" th:fragment="badConfirmPassword">
+  <!--bad passwords message-->
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h3>Passwords are not the same</h3>
+</div>
+
+
+<div class="alert fail text-center" th:fragment="error">
+  <!--other error message-->
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h3 th:text="'Exception '+${error}"></h3>
+</div>

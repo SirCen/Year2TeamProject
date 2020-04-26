@@ -1,0 +1,16 @@
+table_id,size,needs_assistance
+1,2,false
+2,2,false
+3,2,false
+4,2,false
+5,4,false
+6,4,false
+7,4,false
+8,6,false
+9,6,false
+10,8,false
+11,4,false
+12,4,false
+13,2,false
+14,2,false
+15,2,false

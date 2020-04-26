@@ -1,0 +1,43 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #4942db;
+  color: white;
+  text-align: center;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+
+.header h1,
+.card-header h2 {
+  font-weight: 900;
+}
+
+.modify-order-items {
+  position: relative;
+  margin-top: 305px;
+  color: #4942db;
+  background-color: white;
+}
+
+.card {
+  height: 175px;
+  border-bottom: 2px dashed #4942db;
+}
+
+#number {
+  margin-right: 10px;
+  width: 80px;
+  border: 1px solid black;
+}
+
+#deleteItem {
+  margin-top: 30px;
+}
+

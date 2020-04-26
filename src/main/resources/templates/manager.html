@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Manager page for various admin tasks">
+  <title>Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/ManagerStyle.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!--staff nav bar-->
+<div th:replace="~{fragments/staffnavbar :: staffnavbar}"/>
+
+<!--jumbotron header-->
+<div class="jumbotron text-center">
+  <h1>Manager page</h1>
+</div>
+
+<!--switch case to display alerts-->
+<td th:switch="${result}">
+  <span th:case="'successCreate'" >
+    <div th:replace="~{fragments/ManagerFragments :: successCreate}"/>
+  </span>
+  <span th:case="'successCreate'" >
+    <div th:replace="~{fragments/ManagerFragments :: successModify}"/>
+  </span>
+  <span th:case="'BadConfirmPassword'">
+    <div th:replace="~{fragments/ManagerFragments :: badConfirmPassword}"/>
+  </span>
+  <span th:case="'error'">
+    <div th:replace="~{fragments/ManagerFragments :: error}"/>
+  </span>
+  <span th:case="*"></span>
+</td>
+
+<!--modal buttons-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <button id="addUserBtn" class="btn btn-success">Add New User</button>
+    </div>
+    <div class="col-md-6 text-center">
+      <button id="modifyUserBtn" class="btn btn-success">Modify Existing User</button>
+    </div>
+  </div>
+</div>
+
+<!--modal fragment imports-->
+<div th:replace="~{fragments/ManagerFragments :: add-user}"/>
+<div th:replace="~{fragments/ManagerFragments :: modify-user}"/>
+</body>
+<script src="/javascript/manager.js"></script>
+</html>

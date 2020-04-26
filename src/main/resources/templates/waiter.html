@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Joshua Wood and James Courten">
+    <meta name="description" content="Waiter Order page">
+    <meta http-equiv="refresh" content="6">
+    <title> Waiter Order Page </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/WaiterStyle.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/staffnavbar :: staffnavbar}"/>
+<script src="/javascript/waiter.js"></script>
+
+<div class="jumbotron text-center">
+  <h1>Current Orders</h1>
+  <div class="jumbotron text-center" style="margin-top: 0px">
+    <span th:if="${!#lists.isEmpty(tables)}">
+        <div class="helpalert" th:each="tables: ${tables}" th:if="${tables.isNeedsassistance()}">
+            <form id="helpresolved" th:action="@{/waiter/resolvedHelpRequest}" method="post">
+                <button class="closebtn align-self-center" type="submit" name="tablenum" th:value="${tables.id}">&times;</button>
+            </form>
+            <strong>Urgent!</strong> <h7 th:text=" 'Table: ' + ${tables.id} + ' needs assistance!'"></h7>
+        </div>
+    </span>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <h1 th:if="${#lists.isEmpty(currentorders)}">
+      No orders have been placed currently!
+    </h1>
+
+    <div class="col-lg-3 col-md-4 col-xs-6" th:each="currentorders: ${currentorders}">
+      <div th:replace="~{fragments/waitercard.html :: waitercard}"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
